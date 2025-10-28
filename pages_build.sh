@@ -22,13 +22,12 @@ echo ":: Building Flutter web (release)"
 flutter build web --release
 
 echo ":: Resolving symlinks in build output"
-# Find and resolve all symlinks
-cd build/web
-find . -type l | while read -r link; do
-  target=$(readlink "$link")
-  rm "$link"
-  cp -r "$target" "$link"
-done
-cd ../..
+# Create a clean copy without symlinks
+TEMP_BUILD=$(mktemp -d)
+# Use tar to copy and dereference symlinks
+tar -C build/web -chf - . | tar -C "$TEMP_BUILD" -xf -
+# Replace original with resolved version
+rm -rf build/web
+mv "$TEMP_BUILD" build/web
 
 echo ":: Build finished. Output -> build/web"
