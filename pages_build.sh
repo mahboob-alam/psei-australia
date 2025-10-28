@@ -22,9 +22,9 @@ echo ":: Building Flutter web (release)"
 flutter build web --release
 
 echo ":: Resolving symlinks in build output"
-# Use rsync to copy and dereference all symlinks
+# Create a clean directory with resolved symlinks using cp -rL
 TEMP_BUILD=$(mktemp -d)
-rsync -aL build/web/ "$TEMP_BUILD/"
+cp -rL build/web/* "$TEMP_BUILD/" 2>/dev/null || cp -rL build/web/. "$TEMP_BUILD/"
 rm -rf build/web
 mv "$TEMP_BUILD" build/web
 
