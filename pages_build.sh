@@ -21,4 +21,13 @@ flutter pub get
 echo ":: Building Flutter web (release)"
 flutter build web --release
 
+echo ":: Resolving symlinks in build output"
+# Create a temporary directory for resolved files
+TEMP_DIR=$(mktemp -d)
+cp -rL build/web/* "$TEMP_DIR/"
+rm -rf build/web
+mkdir -p build/web
+cp -r "$TEMP_DIR"/* build/web/
+rm -rf "$TEMP_DIR"
+
 echo ":: Build finished. Output -> build/web"
