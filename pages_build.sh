@@ -22,12 +22,13 @@ echo ":: Building Flutter web (release)"
 flutter build web --release
 
 echo ":: Resolving symlinks in build output"
-# Create a temporary directory for resolved files
-TEMP_DIR=$(mktemp -d)
-cp -rL build/web/* "$TEMP_DIR/"
-rm -rf build/web
-mkdir -p build/web
-cp -r "$TEMP_DIR"/* build/web/
-rm -rf "$TEMP_DIR"
+# Find and resolve all symlinks
+cd build/web
+find . -type l | while read -r link; do
+  target=$(readlink "$link")
+  rm "$link"
+  cp -r "$target" "$link"
+done
+cd ../..
 
 echo ":: Build finished. Output -> build/web"
