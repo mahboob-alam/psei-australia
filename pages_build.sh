@@ -22,9 +22,14 @@ echo ":: Building Flutter web (release)"
 flutter build web --release
 
 echo ":: Resolving symlinks in build output"
-# Create a clean directory with resolved symlinks using cp -rL
-TEMP_BUILD=$(mktemp -d)
-cp -rL build/web/* "$TEMP_BUILD/" 2>/dev/null || cp -rL build/web/. "$TEMP_BUILD/"
+# Create a clean directory with resolved symlinks
+TEMP_BUILD="build/web_temp"
+mkdir -p "$TEMP_BUILD"
+
+# Use tar to copy files and automatically resolve symlinks
+(cd build/web && tar chf - .) | (cd "$TEMP_BUILD" && tar xf -)
+
+# Replace the original directory
 rm -rf build/web
 mv "$TEMP_BUILD" build/web
 
