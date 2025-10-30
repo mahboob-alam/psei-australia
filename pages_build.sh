@@ -26,4 +26,10 @@ echo ":: Cleaning up macOS resource forks and hidden files"
 find build/web -name "._*" -type f -delete
 find build/web -name ".DS_Store" -type f -delete
 
+echo ":: Checking for symlinks in build output"
+find build/web -type l -ls || echo "No symlinks found"
+
+echo ":: Listing build/web contents"
+ls -laR build/web | head -100
+
 echo ":: Build finished. Output -> build/web"
