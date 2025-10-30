@@ -47,4 +47,12 @@ echo ":: Moving to build/web for Cloudflare"
 mkdir -p build
 mv /tmp/flutter_web_output build/web
 
+# Apply Cloudflare Pages headers for better caching behavior
+if [ -f web/_headers ]; then
+  echo ":: Copying custom _headers for Cloudflare Pages"
+  cp web/_headers build/web/_headers
+else
+  echo ":: No custom _headers file found in web/"
+fi
+
 echo ":: Build finished. Output -> build/web"

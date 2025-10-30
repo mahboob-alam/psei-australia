@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../utils/responsive.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget child;
@@ -24,9 +25,18 @@ class AppScaffold extends StatelessWidget {
         ),
         title: _buildLogo(context),
         automaticallyImplyLeading: false,
+        actions: [
+          if (Responsive.isDesktop(context)) ...[
+            _buildHeaderLink(context, label: 'Services', route: '/services'),
+            _buildHeaderLink(context, label: 'About', route: '/about'),
+            _buildHeaderLink(context, label: 'Contact', route: '/contact'),
+            const SizedBox(width: 12),
+          ],
+        ],
       ),
       drawer: _buildDrawer(context),
       body: child,
+      bottomNavigationBar: _buildFooter(context),
     );
   }
 
@@ -68,6 +78,29 @@ class AppScaffold extends StatelessWidget {
                 ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildHeaderLink(BuildContext context,
+      {required String label, required String route}) {
+    final isCurrentRoute = ModalRoute.of(context)?.settings.name == route;
+    return TextButton(
+      onPressed: () {
+        if (!isCurrentRoute) {
+          Navigator.pushNamed(context, route);
+        }
+      },
+      style: TextButton.styleFrom(
+        foregroundColor:
+            isCurrentRoute ? AppTheme.primary : AppTheme.textSecondary,
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontWeight: isCurrentRoute ? FontWeight.w700 : FontWeight.w500,
+          fontSize: 16,
+        ),
       ),
     );
   }
@@ -197,6 +230,79 @@ class AppScaffold extends StatelessWidget {
           Navigator.pushNamed(context, route);
         }
       },
+    );
+  }
+
+  Widget _buildFooter(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(top: BorderSide(color: Colors.grey.shade200, width: 1)),
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: Responsive.isMobile(context) ? 16 : 40,
+        vertical: Responsive.isMobile(context) ? 12 : 16,
+      ),
+      child: SafeArea(
+        top: false,
+        child: Responsive.isMobile(context)
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _footerLink(context, 'Services', '/services'),
+                  _footerLink(context, 'About', '/about'),
+                  _footerLink(context, 'Contact', '/contact'),
+                  const SizedBox(height: 8),
+                  Text(
+                    '© ${DateTime.now().year} PSEI Australia',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(color: AppTheme.textSecondary),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      _footerLink(context, 'Services', '/services'),
+                      const SizedBox(width: 16),
+                      _footerLink(context, 'About', '/about'),
+                      const SizedBox(width: 16),
+                      _footerLink(context, 'Contact', '/contact'),
+                    ],
+                  ),
+                  Text(
+                    '© ${DateTime.now().year} PSEI Australia',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(color: AppTheme.textSecondary),
+                  ),
+                ],
+              ),
+      ),
+    );
+  }
+
+  Widget _footerLink(BuildContext context, String label, String route) {
+    final isCurrentRoute = ModalRoute.of(context)?.settings.name == route;
+    return InkWell(
+      onTap: () {
+        if (!isCurrentRoute) {
+          Navigator.pushNamed(context, route);
+        }
+      },
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: isCurrentRoute ? AppTheme.primary : AppTheme.textSecondary,
+              fontWeight: isCurrentRoute ? FontWeight.w700 : FontWeight.w500,
+            ),
+      ),
     );
   }
 }

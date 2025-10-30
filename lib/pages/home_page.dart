@@ -388,7 +388,7 @@ class HomePage extends StatelessWidget {
         'icon': Icons.groups_outlined,
         'title': 'Dedicated Teams',
         'description':
-            '4 professionals in Australia, 3 full-time engineers offshore for 24/7 coverage',
+            'Australian leadership with a dedicated offshore engineering team for 24/7 coverage',
       },
       {
         'icon': Icons.speed,
