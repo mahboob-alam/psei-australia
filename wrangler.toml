@@ -1,0 +1,5 @@
+name = "psei-australia"
+compatibility_date = "2025-10-30"
+
+[site]
+bucket = "./build/web"
