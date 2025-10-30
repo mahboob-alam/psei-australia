@@ -21,11 +21,21 @@ flutter pub get
 echo ":: Building Flutter web (release)"
 flutter build web --release
 
+echo ":: Debugging - checking for symlinks and special files"
+find build/web -type l -ls || echo "No symlinks found"
+find build/web -name "*.packages" -type f || echo "No .packages files"
+find build/web -name ".dart_tool" -type d || echo "No .dart_tool directories"
+ls -laR build/web | head -100
+
 echo ":: Cleaning up build artifacts"
 # Remove macOS resource fork files, Flutter internal files, and other potentially problematic files
 find build/web -name "._*" -type f -delete 2>/dev/null || true
 find build/web -name ".DS_Store" -type f -delete 2>/dev/null || true
 find build/web -name ".last_build_id" -type f -delete 2>/dev/null || true
+# Remove any Flutter metadata that might contain references
+find build/web -name "*.packages" -type f -delete 2>/dev/null || true
+find build/web -name ".dart_tool" -type d -exec rm -rf {} + 2>/dev/null || true
+find build/web -name ".packages" -type f -delete 2>/dev/null || true
 
 # Use tar to create a completely clean copy with all symlinks dereferenced
 echo ":: Creating clean output directory using tar"
