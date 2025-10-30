@@ -1,178 +1,573 @@
 import 'package:flutter/material.dart';
-
+import '../app_theme.dart';
 import '../utils/responsive.dart';
-import '../utils/launcher.dart';
-import '../widgets/sections/articles_section.dart';
-import '../widgets/sections/compliance_section.dart';
-import '../widgets/sections/contact_section.dart';
-import '../widgets/sections/footer_section.dart';
-import '../widgets/sections/hero_section.dart';
-import '../widgets/sections/industries_section.dart';
-import '../widgets/sections/pricing_section.dart';
-import '../widgets/sections/process_section.dart';
-import '../widgets/sections/why_section.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final ScrollController _scrollController = ScrollController();
-  final _heroKey = GlobalKey();
-  final _whyKey = GlobalKey();
-  final _processKey = GlobalKey();
-  final _pricingKey = GlobalKey();
-  final _industriesKey = GlobalKey();
-  final _complianceKey = GlobalKey();
-  final _articlesKey = GlobalKey();
-  final _contactKey = GlobalKey();
-
-  void _scrollTo(GlobalKey key) {
-    final ctx = key.currentContext;
-    if (ctx == null) return;
-    Scrollable.ensureVisible(
-      ctx,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeInOut,
-      alignment: 0.05,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.9),
-            border: const Border(bottom: BorderSide(color: Color(0x11000000))),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.03),
-                blurRadius: 16,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: SafeArea(
-            bottom: false,
-            child: MaxWidth(
-              child: Row(
-                children: [
-                  const _Logo(),
-                  const Spacer(),
-                  if (context.isDesktop) ...[
-                    _NavButton('Home', () => _scrollTo(_heroKey)),
-                    _NavButton('Why PSEI', () => _scrollTo(_whyKey)),
-                    _NavButton('Process', () => _scrollTo(_processKey)),
-                    _NavButton('Pricing', () => _scrollTo(_pricingKey)),
-                    _NavButton('Who We Serve', () => _scrollTo(_industriesKey)),
-                    _NavButton('Standards', () => _scrollTo(_complianceKey)),
-                    _NavButton('Articles', () => _scrollTo(_articlesKey)),
-                    _NavButton('Contact', () => _scrollTo(_contactKey)),
-                    const SizedBox(width: 8),
-                    ElevatedButton(
-                      onPressed: () => mailTo(
-                        email: 'mahboob.alam.uom@gmail.com',
-                        subject: 'PSEI Consultation Request',
-                      ),
-                      child: const Text('Book a Free Consultation'),
-                    ),
-                  ] else ...[
-                    ElevatedButton(
-                      onPressed: () => mailTo(
-                        email: 'mahboob.alam.uom@gmail.com',
-                        subject: 'PSEI Consultation Request',
-                      ),
-                      child: const Text('Let\'s Talk'),
-                    ),
-                  ],
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
       body: SingleChildScrollView(
-        controller: _scrollController,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SectionAnchor(key: _heroKey, child: const HeroSection()),
-            SectionAnchor(key: _whyKey, child: const WhySection()),
-            SectionAnchor(key: _processKey, child: const ProcessSection()),
-            SectionAnchor(key: _pricingKey, child: const PricingSection()),
-            SectionAnchor(
-              key: _industriesKey,
-              child: const IndustriesSection(),
-            ),
-            SectionAnchor(
-              key: _complianceKey,
-              child: const ComplianceSection(),
-            ),
-            SectionAnchor(key: _articlesKey, child: const ArticlesSection()),
-            SectionAnchor(key: _contactKey, child: const ContactSection()),
-            const FooterSection(),
+            // Hero Section
+            _buildHeroSection(context),
+            
+            // Services Overview
+            _buildServicesSection(context),
+            
+            // Why Choose Us
+            _buildWhyChooseSection(context),
+            
+            // CTA Section
+            _buildCTASection(context),
           ],
         ),
       ),
     );
   }
-}
 
-class _NavButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-  const _NavButton(this.label, this.onTap);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Text(label),
+  Widget _buildHeroSection(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height - 80,
+      ),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppTheme.primary.withOpacity(0.05),
+            AppTheme.accent.withOpacity(0.02),
+            Colors.white,
+          ],
+          stops: const [0.0, 0.5, 1.0],
+        ),
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: Responsive.isMobile(context) ? 20 : 80,
+            vertical: 60,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (Responsive.isMobile(context)) const SizedBox(height: 40),
+              Text(
+                'Transform Your Business',
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                      fontSize: Responsive.isMobile(context) ? 36 : 56,
+                      color: AppTheme.textPrimary,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'With Expert Software Development',
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                      fontSize: Responsive.isMobile(context) ? 28 : 42,
+                      color: AppTheme.primary,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 32),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 700),
+                child: Text(
+                  'Custom web & mobile applications, cloud solutions, and data analytics. '
+                  '20+ years of programming expertise, backed by Australian quality and global resources.',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontSize: Responsive.isMobile(context) ? 16 : 20,
+                        color: AppTheme.textSecondary,
+                        fontWeight: FontWeight.w400,
+                        height: 1.6,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(height: 48),
+              Responsive.isMobile(context)
+                  ? Column(
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/contact');
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text('Get Started'),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/services');
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text('View Services'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/contact');
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                              vertical: 4.0,
+                            ),
+                            child: Text('Get Started'),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        OutlinedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/services');
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                              vertical: 4.0,
+                            ),
+                            child: Text('View Services'),
+                          ),
+                        ),
+                      ],
+                    ),
+              const SizedBox(height: 60),
+              
+              // Key Stats
+              _buildStatsRow(context),
+            ],
+          ),
+        ),
       ),
     );
   }
-}
 
-class _Logo extends StatelessWidget {
-  const _Logo();
+  Widget _buildStatsRow(BuildContext context) {
+    final stats = [
+      {'number': '20+', 'label': 'Years Programming'},
+      {'number': '10+', 'label': 'Years Data Analytics'},
+      {'number': '3+', 'label': 'Years Cloud Management'},
+    ];
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    return Responsive.isMobile(context)
+        ? Column(
+            children: stats.map((stat) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 24.0),
+                child: _buildStatItem(context, stat),
+              );
+            }).toList(),
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: stats.map((stat) {
+              return Expanded(
+                child: _buildStatItem(context, stat),
+              );
+            }).toList(),
+          );
+  }
+
+  Widget _buildStatItem(BuildContext context, Map<String, String> stat) {
+    return Column(
       children: [
-        Container(
-          width: 34,
-          height: 34,
-          decoration: BoxDecoration(
-            color: const Color(0xFF2D5BFF),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          alignment: Alignment.center,
-          child: const Text(
-            'P',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
-          ),
+        Text(
+          stat['number']!,
+          style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                fontSize: 48,
+                color: AppTheme.primary,
+                fontWeight: FontWeight.w800,
+              ),
         ),
-        const SizedBox(width: 10),
-        Text('PSEI Australia', style: Theme.of(context).textTheme.titleLarge),
+        const SizedBox(height: 8),
+        Text(
+          stat['label']!,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: AppTheme.textSecondary,
+              ),
+          textAlign: TextAlign.center,
+        ),
       ],
     );
   }
-}
 
-class SectionAnchor extends StatelessWidget {
-  final Widget child;
-  const SectionAnchor({super.key, required this.child});
+  Widget _buildServicesSection(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(
+        horizontal: Responsive.isMobile(context) ? 20 : 80,
+        vertical: 100,
+      ),
+      child: Column(
+        children: [
+          Text(
+            'What We Do',
+            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  fontSize: 42,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Comprehensive solutions for modern businesses',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: AppTheme.textSecondary,
+                  fontWeight: FontWeight.w400,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 64),
+          
+          _buildServiceCards(context),
+          
+          const SizedBox(height: 48),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/services');
+            },
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+              child: Text('View All Services'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-  @override
-  Widget build(BuildContext context) => child;
+  Widget _buildServiceCards(BuildContext context) {
+    final services = [
+      {
+        'icon': Icons.web,
+        'title': 'Web & Mobile Development',
+        'description':
+            'Custom applications built with cutting-edge technology. Beautiful, fast, and scalable solutions.',
+      },
+      {
+        'icon': Icons.cloud_outlined,
+        'title': 'Cloud Solutions',
+        'description':
+            'Expert cloud migration and management. AWS, Azure, Google Cloud. Secure and cost-effective.',
+      },
+      {
+        'icon': Icons.analytics_outlined,
+        'title': 'Data Analytics',
+        'description':
+            'Turn data into insights. Warehousing, reporting, and business intelligence solutions.',
+      },
+    ];
+
+    return Responsive.isMobile(context)
+        ? Column(
+            children: services.map((service) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 24.0),
+                child: _buildServiceCard(context, service),
+              );
+            }).toList(),
+          )
+        : Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: services.map((service) {
+              return Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: _buildServiceCard(context, service),
+                ),
+              );
+            }).toList(),
+          );
+  }
+
+  Widget _buildServiceCard(BuildContext context, Map<String, dynamic> service) {
+    return Card(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(
+          color: AppTheme.primary.withOpacity(0.15),
+          width: 1,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: AppTheme.primary.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(
+                service['icon'] as IconData,
+                size: 48,
+                color: AppTheme.primary,
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              service['title'] as String,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              service['description'] as String,
+              style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWhyChooseSection(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: AppTheme.surface,
+      padding: EdgeInsets.symmetric(
+        horizontal: Responsive.isMobile(context) ? 20 : 80,
+        vertical: 100,
+      ),
+      child: Column(
+        children: [
+          Text(
+            'Why Choose PSEI Australia',
+            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  fontSize: 42,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 64),
+          
+          Responsive.isMobile(context)
+              ? Column(
+                  children: _buildWhyItems(context),
+                )
+              : Wrap(
+                  spacing: 32,
+                  runSpacing: 32,
+                  alignment: WrapAlignment.center,
+                  children: _buildWhyItems(context),
+                ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _buildWhyItems(BuildContext context) {
+    final items = [
+      {
+        'icon': Icons.verified_outlined,
+        'title': 'Proven Expertise',
+        'description':
+            '20+ years programming, 10+ years data analytics, 3+ years cloud management',
+      },
+      {
+        'icon': Icons.groups_outlined,
+        'title': 'Dedicated Teams',
+        'description':
+            '4 professionals in Australia, 3 full-time engineers offshore for 24/7 coverage',
+      },
+      {
+        'icon': Icons.speed,
+        'title': 'Rapid Delivery',
+        'description':
+            'Agile development with global resources for faster time-to-market',
+      },
+      {
+        'icon': Icons.support_agent,
+        'title': 'Local Support',
+        'description':
+            'Australian-based management with direct communication in your timezone',
+      },
+    ];
+
+    return items.map((item) {
+      return Container(
+        width: Responsive.isMobile(context)
+            ? double.infinity
+            : (MediaQuery.of(context).size.width - 192) / 2,
+        constraints: const BoxConstraints(maxWidth: 500),
+        padding: const EdgeInsets.all(32),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: AppTheme.primary.withOpacity(0.15),
+            width: 1,
+          ),
+        ),
+        child: Column(
+          children: [
+            Icon(
+              item['icon'] as IconData,
+              size: 48,
+              color: AppTheme.primary,
+            ),
+            const SizedBox(height: 20),
+            Text(
+              item['title'] as String,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 12),
+            Text(
+              item['description'] as String,
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      );
+    }).toList();
+  }
+
+  Widget _buildCTASection(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppTheme.primary,
+            AppTheme.primaryDark,
+          ],
+        ),
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: Responsive.isMobile(context) ? 20 : 80,
+        vertical: 100,
+      ),
+      child: Column(
+        children: [
+          Text(
+            'Ready to Get Started?',
+            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  fontSize: 42,
+                  color: Colors.white,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Text(
+              'Let\'s discuss how we can help transform your business with custom software solutions.',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: Colors.white.withOpacity(0.9),
+                    fontWeight: FontWeight.w400,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 48),
+          Responsive.isMobile(context)
+              ? Column(
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/contact');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: AppTheme.primary,
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 4.0),
+                          child: Text('Contact Us'),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/about');
+                        },
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          side: const BorderSide(color: Colors.white, width: 2),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 4.0),
+                          child: Text('Learn More'),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/contact');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: AppTheme.primary,
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 4.0,
+                        ),
+                        child: Text('Contact Us'),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    OutlinedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/about');
+                      },
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        side: const BorderSide(color: Colors.white, width: 2),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 4.0,
+                        ),
+                        child: Text('Learn More'),
+                      ),
+                    ),
+                  ],
+                ),
+        ],
+      ),
+    );
+  }
 }

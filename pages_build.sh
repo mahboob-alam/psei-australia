@@ -23,8 +23,12 @@ echo ":: Pub get"
 flutter pub get
 
 echo ":: Building Flutter web (release)"
-# Build to a temporary directory outside build/
-flutter build web --release --output /tmp/flutter_web_output
+# Build with optimization flags for better performance
+flutter build web --release \
+  --web-renderer canvaskit \
+  --tree-shake-icons \
+  --pwa-strategy offline-first \
+  --output /tmp/flutter_web_output
 
 echo ":: Debugging - checking for symlinks and special files"
 find /tmp/flutter_web_output -type l -ls || echo "No symlinks found"
