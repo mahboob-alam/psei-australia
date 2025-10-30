@@ -27,11 +27,12 @@ find build/web -name "._*" -type f -delete 2>/dev/null || true
 find build/web -name ".DS_Store" -type f -delete 2>/dev/null || true
 find build/web -name ".last_build_id" -type f -delete 2>/dev/null || true
 
-# Ensure no symlinks exist by copying to a clean directory
-echo ":: Creating clean output directory"
-rm -rf output_final
-cp -rL build/web output_final
-rm -rf build/web
-mv output_final build/web
+# Use tar to create a completely clean copy with all symlinks dereferenced
+echo ":: Creating clean output directory using tar"
+cd build
+tar chf - web | tar xf - --transform='s/^web/web_clean/'
+rm -rf web
+mv web_clean web
+cd ..
 
 echo ":: Build finished. Output -> build/web"
