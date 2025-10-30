@@ -19,12 +19,17 @@ echo ":: Pub get"
 flutter pub get
 
 echo ":: Building Flutter web (release)"
-flutter build web --release
+# Build to a custom output directory to avoid any conflicts
+flutter build web --release --output output_web
 
 echo ":: Cleaning up build artifacts"
 # Remove macOS resource fork files, Flutter internal files, and other potentially problematic files
-find build/web -name "._*" -type f -delete 2>/dev/null || true
-find build/web -name ".DS_Store" -type f -delete 2>/dev/null || true
-find build/web -name ".last_build_id" -type f -delete 2>/dev/null || true
+find output_web -name "._*" -type f -delete 2>/dev/null || true
+find output_web -name ".DS_Store" -type f -delete 2>/dev/null || true
+find output_web -name ".last_build_id" -type f -delete 2>/dev/null || true
+
+# Copy to standard build/web location for Cloudflare
+mkdir -p build
+mv output_web build/web
 
 echo ":: Build finished. Output -> build/web"
