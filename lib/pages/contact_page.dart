@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../app_theme.dart';
 import '../utils/responsive.dart';
+import '../widgets/hero_image.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -63,6 +64,15 @@ class _ContactPageState extends State<ContactPage> {
       ),
       child: Column(
         children: [
+          // Add hero image
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: const HeroImage(
+              type: 'contact',
+              height: 250,
+            ),
+          ),
+          const SizedBox(height: 32),
           Text(
             'Get In Touch',
             style: Theme.of(context).textTheme.displayMedium,

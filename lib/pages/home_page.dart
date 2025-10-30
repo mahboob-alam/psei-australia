@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../utils/responsive.dart';
+import '../widgets/hero_image.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -261,18 +262,21 @@ class HomePage extends StatelessWidget {
         'title': 'Web & Mobile Development',
         'description':
             'Custom applications built with cutting-edge technology. Beautiful, fast, and scalable solutions.',
+        'imageType': 'development',
       },
       {
         'icon': Icons.cloud_outlined,
         'title': 'Cloud Solutions',
         'description':
             'Expert cloud migration and management. AWS, Azure, Google Cloud. Secure and cost-effective.',
+        'imageType': 'cloud',
       },
       {
         'icon': Icons.analytics_outlined,
         'title': 'Data Analytics',
         'description':
             'Turn data into insights. Warehousing, reporting, and business intelligence solutions.',
+        'imageType': 'analytics',
       },
     ];
 
@@ -312,17 +316,10 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.all(32.0),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: AppTheme.primary.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Icon(
-                service['icon'] as IconData,
-                size: 48,
-                color: AppTheme.primary,
-              ),
+            // Add hero image
+            HeroImage(
+              type: service['imageType'] as String,
+              height: 200,
             ),
             const SizedBox(height: 24),
             Text(

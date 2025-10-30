@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../utils/responsive.dart';
+import '../widgets/hero_image.dart';
 
 class ServicesPage extends StatelessWidget {
   const ServicesPage({super.key});
@@ -141,17 +142,14 @@ class ServicesPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppTheme.primary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Icon(
-                    service['icon'] as IconData,
-                    size: 40,
-                    color: AppTheme.primary,
-                  ),
+                // Add hero image based on service type
+                HeroImage(
+                  type: service['icon'] == Icons.web
+                      ? 'development'
+                      : service['icon'] == Icons.cloud_outlined
+                          ? 'cloud'
+                          : 'analytics',
+                  height: 180,
                 ),
                 const SizedBox(height: 24),
                 Text(
