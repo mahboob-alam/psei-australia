@@ -150,10 +150,10 @@ class AboutPage extends StatelessWidget {
                     const SizedBox(height: 24),
                     _buildTeamCard(
                       context,
-                      title: 'Offshore Development',
-                      count: '24/7 Capacity',
+                      title: 'Hybrid Onshore/Offshore Delivery',
+                      count: '24/7 Coverage',
                       description:
-                          'Dedicated offshore engineering team delivering round-the-clock development capacity while maintaining rigorous quality standards.',
+                          'Hybrid onshore/offshore development and support with Australian leadership—truly international teamwork ensuring top-quality delivery and continuous coverage.',
                       icon: Icons.engineering_outlined,
                     ),
                   ],
@@ -175,10 +175,10 @@ class AboutPage extends StatelessWidget {
                     Expanded(
                       child: _buildTeamCard(
                         context,
-                        title: 'Offshore Development',
-                        count: '24/7 Capacity',
+                        title: 'Hybrid Onshore/Offshore Delivery',
+                        count: '24/7 Coverage',
                         description:
-                            'Dedicated offshore engineering team delivering round-the-clock development capacity while maintaining rigorous quality standards.',
+                            'Hybrid onshore/offshore development and support with Australian leadership—truly international teamwork ensuring top-quality delivery and continuous coverage.',
                         icon: Icons.engineering_outlined,
                       ),
                     ),

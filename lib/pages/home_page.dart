@@ -413,7 +413,7 @@ class HomePage extends StatelessWidget {
         'icon': Icons.groups_outlined,
         'title': 'Dedicated Teams',
         'description':
-            'Australian leadership with a dedicated offshore engineering team for 24/7 coverage',
+            'Hybrid onshore/offshore model with Australian leadership and a truly international team for 24/7 support and top-quality delivery',
       },
       {
         'icon': Icons.speed,
