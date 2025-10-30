@@ -26,8 +26,12 @@ echo ":: Resolving symlinks in build output"
 TEMP_BUILD="build/web_temp"
 mkdir -p "$TEMP_BUILD"
 
-# Use tar to copy files and automatically resolve symlinks
-(cd build/web && tar chf - .) | (cd "$TEMP_BUILD" && tar xf -)
+# Copy all files and directories, dereferencing symlinks
+# Using find with cp to ensure all symlinks are resolved
+cd build/web
+find . -type f -exec sh -c 'mkdir -p "'"$TEMP_BUILD"'/$(dirname "$1")" && cp -L "$1" "'"$TEMP_BUILD"'/$1"' _ {} \;
+find . -type d -exec mkdir -p "$TEMP_BUILD/{}" \;
+cd ../..
 
 # Replace the original directory
 rm -rf build/web
