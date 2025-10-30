@@ -21,19 +21,9 @@ flutter pub get
 echo ":: Building Flutter web (release)"
 flutter build web --release
 
-echo ":: Resolving symlinks in build output"
-# Create a clean copy resolving any potential symlinks
-# Use a simple cp with explicit options
-if [ -d "build/web" ]; then
-  TEMP_BUILD="build/web_clean"
-  mkdir -p "$TEMP_BUILD"
-  
-  # Copy with tar - fast and reliable
-  tar -C build/web -cf - . | tar -C "$TEMP_BUILD" -xf -
-  
-  # Replace
-  rm -rf build/web
-  mv "$TEMP_BUILD" build/web
-fi
+echo ":: Cleaning up macOS resource forks and hidden files"
+# Remove macOS resource fork files (._*) and other problematic files
+find build/web -name "._*" -type f -delete
+find build/web -name ".DS_Store" -type f -delete
 
 echo ":: Build finished. Output -> build/web"
