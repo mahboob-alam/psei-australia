@@ -21,15 +21,10 @@ flutter pub get
 echo ":: Building Flutter web (release)"
 flutter build web --release
 
-echo ":: Cleaning up macOS resource forks and hidden files"
-# Remove macOS resource fork files (._*) and other problematic files
-find build/web -name "._*" -type f -delete
-find build/web -name ".DS_Store" -type f -delete
-
-echo ":: Checking for symlinks in build output"
-find build/web -type l -ls || echo "No symlinks found"
-
-echo ":: Listing build/web contents"
-ls -laR build/web | head -100
+echo ":: Cleaning up build artifacts"
+# Remove macOS resource fork files, Flutter internal files, and other potentially problematic files
+find build/web -name "._*" -type f -delete 2>/dev/null || true
+find build/web -name ".DS_Store" -type f -delete 2>/dev/null || true
+find build/web -name ".last_build_id" -type f -delete 2>/dev/null || true
 
 echo ":: Build finished. Output -> build/web"
