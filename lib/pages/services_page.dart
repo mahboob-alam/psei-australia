@@ -56,15 +56,33 @@ class ServicesPage extends StatelessWidget {
                 horizontal: Responsive.isMobile(context) ? 20 : 80,
                 vertical: 80,
               ),
-              child: Responsive.isMobile(context)
-                  ? Column(
-                      children: _buildServiceCards(context),
-                    )
-                  : Wrap(
-                      spacing: 32,
-                      runSpacing: 32,
-                      children: _buildServiceCards(context),
-                    ),
+                child: Responsive.isMobile(context)
+                    ? Column(
+                        children: _buildServiceCards(context),
+                      )
+                    : LayoutBuilder(
+                        builder: (context, constraints) {
+                          final maxWidth = constraints.maxWidth;
+                          const spacing = 32.0;
+                          double itemWidth;
+                          if (maxWidth >= 1200) {
+                            itemWidth = 360;
+                          } else if (maxWidth >= 960) {
+                            itemWidth = 320;
+                          } else {
+                            itemWidth = (maxWidth - spacing) / 2;
+                            if (itemWidth < 280) itemWidth = maxWidth;
+                          }
+                          return Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: spacing,
+                            runSpacing: spacing,
+                            children: _buildServiceCards(context)
+                                .map((w) => SizedBox(width: itemWidth, child: w))
+                                .toList(),
+                          );
+                        },
+                      ),
             ),
 
             // Pricing Section
@@ -124,9 +142,7 @@ class ServicesPage extends StatelessWidget {
 
     return services.map((service) {
       return Container(
-        width: Responsive.isMobile(context)
-            ? double.infinity
-            : (MediaQuery.of(context).size.width - 192) / 2,
+        width: double.infinity,
         constraints: const BoxConstraints(maxWidth: 600),
         child: Card(
           elevation: 2,

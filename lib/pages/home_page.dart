@@ -284,26 +284,47 @@ class HomePage extends StatelessWidget {
       },
     ];
 
-    return Responsive.isMobile(context)
-        ? Column(
-            children: services.map((service) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 24.0),
-                child: _buildServiceCard(context, service),
-              );
-            }).toList(),
-          )
-        : Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: services.map((service) {
-              return Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: _buildServiceCard(context, service),
-                ),
-              );
-            }).toList(),
+    if (Responsive.isMobile(context)) {
+      return Column(
+        children: services.map((service) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 24.0),
+            child: _buildServiceCard(context, service),
           );
+        }).toList(),
+      );
+    }
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxWidth = constraints.maxWidth;
+        const spacing = 24.0;
+        double itemWidth;
+        if (maxWidth >= 1200) {
+          itemWidth = 360;
+        } else if (maxWidth >= 960) {
+          itemWidth = 320;
+        } else {
+          // For tighter widths, use two columns or single if necessary
+          itemWidth = (maxWidth - spacing) / 2;
+          if (itemWidth < 280) {
+            itemWidth = maxWidth; // fall back to single column
+          }
+        }
+
+        return Wrap(
+          alignment: WrapAlignment.center,
+          spacing: spacing,
+          runSpacing: spacing,
+          children: services.map((service) {
+            return SizedBox(
+              width: itemWidth,
+              child: _buildServiceCard(context, service),
+            );
+          }).toList(),
+        );
+      },
+    );
   }
 
   Widget _buildServiceCard(BuildContext context, Map<String, dynamic> service) {
