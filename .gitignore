@@ -35,6 +35,8 @@ windows/flutter/ephemeral/
 *.iml
 *.log
 *.DS_Store
+._*
+
 # Miscellaneous
 *.class
 *.log
