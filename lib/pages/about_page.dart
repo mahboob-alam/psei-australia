@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../utils/responsive.dart';
 import '../widgets/hero_image.dart';
+import '../widgets/footer.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -26,6 +27,9 @@ class AboutPage extends StatelessWidget {
             
             // Partner Network
             _buildPartnerSection(context),
+
+            // Footer
+            const AppFooter(),
           ],
         ),
       ),

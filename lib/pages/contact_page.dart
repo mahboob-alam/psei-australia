@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../app_theme.dart';
 import '../utils/responsive.dart';
 import '../widgets/hero_image.dart';
+import '../widgets/footer.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -39,6 +40,9 @@ class _ContactPageState extends State<ContactPage> {
             
             // Contact Form and Info
             _buildContactSection(context),
+          
+            // Footer
+            const AppFooter(),
           ],
         ),
       ),

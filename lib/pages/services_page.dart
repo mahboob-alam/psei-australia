@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../utils/responsive.dart';
 import '../widgets/hero_image.dart';
+import '../widgets/footer.dart';
 
 class ServicesPage extends StatelessWidget {
   const ServicesPage({super.key});
@@ -271,47 +272,55 @@ class ServicesPage extends StatelessWidget {
                   children: _buildPricingCards(context),
                 ),
           const SizedBox(height: 48),
-          Card(
-            elevation: 0,
-            color: AppTheme.primary.withOpacity(0.05),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.info_outline,
-                    size: 48,
-                    color: AppTheme.primary,
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 800),
+              child: Card(
+                elevation: 0,
+                color: AppTheme.primary.withOpacity(0.05),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.info_outline,
+                        size: 48,
+                        color: AppTheme.primary,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Custom Enterprise Solutions',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(fontWeight: FontWeight.w600),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        'Need something more specific? We offer tailored solutions for complex projects, ongoing support contracts, and dedicated team engagements. Contact us for a custom quote.',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 24),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/contact');
+                        },
+                        icon: const Icon(Icons.mail_outline),
+                        label: const Text('Request Custom Quote'),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Custom Enterprise Solutions',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Need something more specific? We offer tailored solutions for complex projects, ongoing support contracts, and dedicated team engagements. Contact us for a custom quote.',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 24),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/contact');
-                    },
-                    icon: const Icon(Icons.mail_outline),
-                    label: const Text('Request Custom Quote'),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
+          const SizedBox(height: 48),
+          const AppFooter(),
         ],
       ),
     );

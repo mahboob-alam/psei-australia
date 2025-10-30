@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../utils/responsive.dart';
 import '../widgets/hero_image.dart';
+import '../widgets/footer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -23,6 +24,9 @@ class HomePage extends StatelessWidget {
             
             // CTA Section
             _buildCTASection(context),
+
+            // Footer
+            const AppFooter(),
           ],
         ),
       ),
