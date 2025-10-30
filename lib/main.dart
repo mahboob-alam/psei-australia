@@ -25,10 +25,10 @@ class MainApp extends StatelessWidget {
       theme: AppTheme.light,
       initialRoute: '/',
       routes: {
-        '/': (context) => const AppScaffold(child: HomePage()),
-        '/services': (context) => const AppScaffold(child: ServicesPage()),
-        '/about': (context) => const AppScaffold(child: AboutPage()),
-        '/contact': (context) => const AppScaffold(child: ContactPage()),
+        '/': (context) => AppScaffold(child: const HomePage()),
+        '/services': (context) => AppScaffold(child: const ServicesPage()),
+        '/about': (context) => AppScaffold(child: const AboutPage()),
+        '/contact': (context) => AppScaffold(child: const ContactPage()),
       },
     );
   }
