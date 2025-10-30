@@ -137,19 +137,19 @@ class AboutPage extends StatelessWidget {
                   children: [
                     _buildTeamCard(
                       context,
-                      title: 'Australia Team',
-                      count: '4 Professionals',
+                      title: 'Australian Leadership',
+                      count: 'Local Expertise',
                       description:
-                          'Skilled part-time resources based in Australia providing local expertise and client engagement.',
+                          'Experienced professionals based in Australia providing strategic direction, client engagement, and ensuring Australian quality standards.',
                       icon: Icons.people_outline,
                     ),
                     const SizedBox(height: 24),
                     _buildTeamCard(
                       context,
-                      title: 'Bangladesh Team',
-                      count: '3 Engineers',
+                      title: 'Offshore Development',
+                      count: '24/7 Capacity',
                       description:
-                          'Full-time software engineers working through our sister company, PSEI Bangladesh, delivering 24/7 development capacity.',
+                          'Dedicated offshore engineering team delivering round-the-clock development capacity while maintaining rigorous quality standards.',
                       icon: Icons.engineering_outlined,
                     ),
                   ],
@@ -160,10 +160,10 @@ class AboutPage extends StatelessWidget {
                     Expanded(
                       child: _buildTeamCard(
                         context,
-                        title: 'Australia Team',
-                        count: '4 Professionals',
+                        title: 'Australian Leadership',
+                        count: 'Local Expertise',
                         description:
-                            'Skilled part-time resources based in Australia providing local expertise and client engagement.',
+                            'Experienced professionals based in Australia providing strategic direction, client engagement, and ensuring Australian quality standards.',
                         icon: Icons.people_outline,
                       ),
                     ),
@@ -171,10 +171,10 @@ class AboutPage extends StatelessWidget {
                     Expanded(
                       child: _buildTeamCard(
                         context,
-                        title: 'Bangladesh Team',
-                        count: '3 Engineers',
+                        title: 'Offshore Development',
+                        count: '24/7 Capacity',
                         description:
-                            'Full-time software engineers working through our sister company, PSEI Bangladesh, delivering 24/7 development capacity.',
+                            'Dedicated offshore engineering team delivering round-the-clock development capacity while maintaining rigorous quality standards.',
                         icon: Icons.engineering_outlined,
                       ),
                     ),
