@@ -1,5 +1,2 @@
 name = "psei-australia"
-compatibility_date = "2025-10-30"
-
-[site]
-bucket = "./build/web"
+pages_build_output_dir = "build/web"
