@@ -77,7 +77,7 @@ class PortfolioPage extends StatelessWidget {
         'description':
             'ZeroWave delivers clean energy, smart connections, and zero waste solutions. The website and mobile app provide information, updates, and a platform for users to connect and engage with sustainable initiatives.',
   'image': 'assets/zerowave_logo.jpeg',
-  'apk': '/app-release.apk',
+  'apk': 'https://github.com/mahboob-alam/zerowave/releases/download/v1.0.0/app-release.apk',
       },
     ];
 
