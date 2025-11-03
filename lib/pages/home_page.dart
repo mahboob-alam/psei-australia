@@ -61,24 +61,24 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (Responsive.isMobile(context)) const SizedBox(height: 40),
-              Text(
-                'Transform Your Business',
-                style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      fontSize: Responsive.isMobile(context) ? 36 : 56,
-                      color: AppTheme.textPrimary,
-                    ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'With Expert Software Development',
-                style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                      fontSize: Responsive.isMobile(context) ? 28 : 42,
-                      color: AppTheme.primary,
-                    ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 32),
+                Text(
+                  'Prince Software Engineering Institute',
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        fontSize: Responsive.isMobile(context) ? 36 : 56,
+                        color: AppTheme.textPrimary,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Excellence in software development and maintenance',
+                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                        fontSize: Responsive.isMobile(context) ? 28 : 42,
+                        color: AppTheme.primary,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 32),
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 700),
                 child: Text(

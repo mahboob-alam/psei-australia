@@ -27,10 +27,10 @@ class AppScaffold extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: [
           if (Responsive.isDesktop(context)) ...[
-            _buildHeaderLink(context, label: 'Portfolio', route: '/portfolio'),
-            _buildHeaderLink(context, label: 'Services', route: '/services'),
-            _buildHeaderLink(context, label: 'About', route: '/about'),
-            _buildHeaderLink(context, label: 'Contact', route: '/contact'),
+            _buildHeaderLink(context, label: 'Portfolio', route: '/portfolio', icon: Icons.work_outline),
+            _buildHeaderLink(context, label: 'Services', route: '/services', icon: Icons.build_outlined),
+            _buildHeaderLink(context, label: 'About', route: '/about', icon: Icons.info_outline),
+            _buildHeaderLink(context, label: 'Contact', route: '/contact', icon: Icons.mail_outline),
             const SizedBox(width: 12),
           ],
         ],
@@ -83,7 +83,7 @@ class AppScaffold extends StatelessWidget {
   }
 
   Widget _buildHeaderLink(BuildContext context,
-      {required String label, required String route}) {
+  {required String label, required String route, IconData? icon}) {
     final isCurrentRoute = ModalRoute.of(context)?.settings.name == route;
     return TextButton(
       onPressed: () {

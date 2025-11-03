@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../app_theme.dart';
+import '../utils/apk_download_helper.dart';
 import '../widgets/footer.dart';
 
 class PortfolioPage extends StatelessWidget {
@@ -76,7 +77,7 @@ class PortfolioPage extends StatelessWidget {
         'description':
             'ZeroWave delivers clean energy, smart connections, and zero waste solutions. The website and mobile app provide information, updates, and a platform for users to connect and engage with sustainable initiatives.',
   'image': 'assets/zerowave_logo.jpeg',
-  'apk': 'app-release.apk',
+  'apk': '/app-release.apk',
       },
     ];
 
@@ -102,17 +103,11 @@ class PortfolioPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       if (project['image'] != null)
-                        project['image']!.endsWith('.svg')
-                            ? Image.asset(
-                                project['image']!,
-                                height: 64,
-                                fit: BoxFit.contain,
-                              )
-                            : Image.asset(
-                                project['image']!,
-                                height: 64,
-                                fit: BoxFit.contain,
-                              ),
+                        Image.asset(
+                          project['image']!,
+                          height: 64,
+                          fit: BoxFit.contain,
+                        ),
                       const SizedBox(height: 24),
                       Text(
                         project['title']!,
@@ -142,15 +137,9 @@ class PortfolioPage extends StatelessWidget {
                       if (project['apk'] != null) ...[
                         const SizedBox(height: 16),
                         ElevatedButton.icon(
-                          onPressed: () async {
-                            // Use browser download for APK
-                            final uri = Uri.parse(project['apk']!);
-                            if (await canLaunchUrl(uri)) {
-                              await launchUrl(uri, mode: LaunchMode.platformDefault);
-                            } else {
-                              // fallback: open in new tab
-                              await launchUrl(uri, mode: LaunchMode.externalApplication);
-                            }
+                          onPressed: () {
+                            const apkPath = '/app-release.apk';
+                            downloadApk(apkPath);
                           },
                           icon: const Icon(Icons.download),
                           label: const Text('Download Android App'),
