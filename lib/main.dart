@@ -6,6 +6,7 @@ import 'pages/home_page.dart';
 import 'pages/services_page.dart';
 import 'pages/about_page.dart';
 import 'pages/contact_page.dart';
+import 'pages/portfolio_page.dart';
 import 'widgets/app_scaffold.dart';
 
 void main() {
@@ -29,6 +30,7 @@ class MainApp extends StatelessWidget {
         '/services': (context) => AppScaffold(child: const ServicesPage()),
         '/about': (context) => AppScaffold(child: const AboutPage()),
         '/contact': (context) => AppScaffold(child: const ContactPage()),
+        '/portfolio': (context) => AppScaffold(child: const PortfolioPage()),
       },
     );
   }

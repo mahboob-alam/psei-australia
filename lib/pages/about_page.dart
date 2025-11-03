@@ -3,6 +3,7 @@ import '../app_theme.dart';
 import '../utils/responsive.dart';
 import '../widgets/hero_image.dart';
 import '../widgets/footer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -466,8 +467,11 @@ class AboutPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             OutlinedButton.icon(
-              onPressed: () {
-                // Could open URL in browser
+              onPressed: () async {
+                final uri = Uri.parse(url.startsWith('http') ? url : 'https://$url');
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                }
               },
               style: OutlinedButton.styleFrom(
                 foregroundColor: color,

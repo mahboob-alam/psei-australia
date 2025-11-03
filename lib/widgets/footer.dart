@@ -24,6 +24,8 @@ class AppFooter extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  _footerLink(context, 'Portfolio', '/portfolio'),
+                  const SizedBox(height: 8),
                   _footerLink(context, 'Services', '/services'),
                   const SizedBox(height: 8),
                   _footerLink(context, 'About', '/about'),
@@ -45,6 +47,8 @@ class AppFooter extends StatelessWidget {
                 children: [
                   Row(
                     children: [
+                      _footerLink(context, 'Portfolio', '/portfolio'),
+                      const SizedBox(width: 16),
                       _footerLink(context, 'Services', '/services'),
                       const SizedBox(width: 16),
                       _footerLink(context, 'About', '/about'),

@@ -27,6 +27,7 @@ class AppScaffold extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: [
           if (Responsive.isDesktop(context)) ...[
+            _buildHeaderLink(context, label: 'Portfolio', route: '/portfolio'),
             _buildHeaderLink(context, label: 'Services', route: '/services'),
             _buildHeaderLink(context, label: 'About', route: '/about'),
             _buildHeaderLink(context, label: 'Contact', route: '/contact'),
@@ -163,6 +164,12 @@ class AppScaffold extends StatelessWidget {
             label: 'Home',
             icon: Icons.home_outlined,
             route: '/',
+          ),
+          _buildDrawerItem(
+            context,
+            label: 'Portfolio',
+            icon: Icons.work_outline,
+            route: '/portfolio',
           ),
           _buildDrawerItem(
             context,
