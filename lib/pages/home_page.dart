@@ -245,14 +245,29 @@ class HomePage extends StatelessWidget {
           _buildServiceCards(context),
           
           const SizedBox(height: 48),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/services');
-            },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-              child: Text('View All Services'),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/services');
+                },
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+                  child: Text('View All Services'),
+                ),
+              ),
+              const SizedBox(width: 16),
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/portfolio');
+                },
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+                  child: Text('View Our Portfolio'),
+                ),
+              ),
+            ],
           ),
         ],
       ),
