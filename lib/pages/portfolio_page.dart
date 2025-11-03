@@ -49,7 +49,7 @@ class PortfolioPage extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'Showcasing our completed projects and digital solutions',
+            'Our notable projects...',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: Colors.white70,
                   fontWeight: FontWeight.w400,
@@ -68,15 +68,15 @@ class PortfolioPage extends StatelessWidget {
         'url': 'https://y3smilesdental.com.au',
         'description':
             'A modern, family-focused dental clinic website for Broadmeadows, Melbourne. Features online booking, comprehensive treatment info, and health fund integration. Y3 Smiles Dental provides gentle, high-quality care for all ages, including emergency and children’s dentistry.',
-        'image': 'https://y3smilesdental.com.au/static/logo-9a2c1f74cbbbb67680d9b245c77ae1ba.svg',
+  'image': 'assets/y3_logo.svg',
       },
       {
         'title': 'ZeroWave Website & Mobile App',
         'url': 'https://www.zerowave.com.au',
         'description':
             'ZeroWave delivers clean energy, smart connections, and zero waste solutions. The website and mobile app provide information, updates, and a platform for users to connect and engage with sustainable initiatives.',
-        'image': 'https://www.zerowave.com.au/favicon.ico',
-        'apk': '/app-release.apk',
+  'image': 'assets/zerowave_logo.jpeg',
+  'apk': 'app-release.apk',
       },
     ];
 
@@ -102,11 +102,17 @@ class PortfolioPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       if (project['image'] != null)
-                        Image.network(
-                          project['image']!,
-                          height: 64,
-                          fit: BoxFit.contain,
-                        ),
+                        project['image']!.endsWith('.svg')
+                            ? Image.asset(
+                                project['image']!,
+                                height: 64,
+                                fit: BoxFit.contain,
+                              )
+                            : Image.asset(
+                                project['image']!,
+                                height: 64,
+                                fit: BoxFit.contain,
+                              ),
                       const SizedBox(height: 24),
                       Text(
                         project['title']!,
@@ -137,8 +143,12 @@ class PortfolioPage extends StatelessWidget {
                         const SizedBox(height: 16),
                         ElevatedButton.icon(
                           onPressed: () async {
+                            // Use browser download for APK
                             final uri = Uri.parse(project['apk']!);
                             if (await canLaunchUrl(uri)) {
+                              await launchUrl(uri, mode: LaunchMode.platformDefault);
+                            } else {
+                              // fallback: open in new tab
                               await launchUrl(uri, mode: LaunchMode.externalApplication);
                             }
                           },
