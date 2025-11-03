@@ -109,11 +109,13 @@ class PortfolioPage extends StatelessWidget {
                                 project['image']!,
                                 height: 64,
                                 fit: BoxFit.contain,
+                                placeholderBuilder: (context) => const Icon(Icons.image, size: 64),
                               )
                             : Image.asset(
                                 project['image']!,
                                 height: 64,
                                 fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) => const Icon(Icons.broken_image, size: 64),
                               ),
                       const SizedBox(height: 24),
                       Text(
