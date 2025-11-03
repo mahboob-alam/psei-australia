@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../app_theme.dart';
 import '../utils/apk_download_helper.dart';
@@ -103,11 +104,17 @@ class PortfolioPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       if (project['image'] != null)
-                        Image.asset(
-                          project['image']!,
-                          height: 64,
-                          fit: BoxFit.contain,
-                        ),
+                        project['image']!.endsWith('.svg')
+                            ? SvgPicture.asset(
+                                project['image']!,
+                                height: 64,
+                                fit: BoxFit.contain,
+                              )
+                            : Image.asset(
+                                project['image']!,
+                                height: 64,
+                                fit: BoxFit.contain,
+                              ),
                       const SizedBox(height: 24),
                       Text(
                         project['title']!,
