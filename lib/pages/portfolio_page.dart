@@ -50,7 +50,7 @@ class PortfolioPage extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'Our notable projects...',
+            'Our notable projects and digital solutions',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: Colors.white70,
                   fontWeight: FontWeight.w400,
