@@ -1,51 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    version="1.1"
-   id="svg1"
    width="745.49335"
    height="298.26666"
    viewBox="0 0 745.49335 298.26666"
-   sodipodi:docname="Smile Dental logo.eps"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs1" />
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1">
-    <inkscape:page
-       x="0"
-       y="0"
-       inkscape:label="1"
-       id="page1"
-       width="745.49335"
-       height="298.26666"
-       margin="0"
-       bleed="0" />
-  </sodipodi:namedview>
-  <g
-     id="g1"
-     inkscape:groupmode="layer"
-     inkscape:label="1">
-    <g
-       id="group-R5">
+   xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <g>
       <path
-         id="path2"
          d="m 189.988,1727.54 h 59.774 v 202.8 l 189.988,295.3 h -66.883 l -56.215,-90.37 c -41.75,-66.41 -73.054,-117.65 -93.925,-153.7 h -4.274 c -16.125,27.99 -40.32,68.08 -72.578,120.26 -1.898,2.85 -9.254,14.46 -22.059,34.86 l -56.2144,88.95 H 0 l 189.988,-296.01 v -202.09"
          style="fill:#6d6c6a;fill-opacity:1;fill-rule:nonzero;stroke:none"
          transform="matrix(0.13333333,0,0,-0.13333333,0,298.26667)" />
       <path
-         id="path3"
          d="m 705.852,1984.41 v 4.28 c 38.894,5.21 66.41,18.5 82.543,39.84 16.125,21.36 24.191,45.78 24.191,73.3 0,42.69 -14.707,75.9 -44.117,99.62 -29.414,23.71 -67.84,35.58 -115.274,35.58 -50.285,0 -90.132,-13.88 -119.547,-41.63 -29.414,-27.75 -44.355,-68.19 -44.828,-121.33 h 59.063 c 1.894,73.06 37,109.59 105.312,109.59 30.36,0 54.668,-7.24 72.934,-21.71 18.266,-14.46 27.394,-34.98 27.394,-61.54 0,-28 -9.367,-50.28 -28.105,-66.89 -18.734,-16.6 -43.996,-24.91 -75.785,-24.91 h -33.442 v -49.1 h 37.004 c 34.629,0 62.145,-7.59 82.543,-22.76 20.399,-15.19 30.598,-38.43 30.598,-69.74 0,-29.89 -9.965,-53.61 -29.887,-71.16 -19.926,-17.55 -46.492,-26.33 -79.699,-26.33 -35.574,0 -63.566,9.02 -83.965,27.04 -20.398,18.03 -31.07,45.07 -32.019,81.12 h -58.352 c -0.473,-50.29 14.711,-89.77 45.543,-118.47 30.836,-28.71 73.766,-43.06 128.793,-43.06 32.73,0 62.145,6.05 88.238,18.15 26.09,12.1 46.489,29.06 61.196,50.88 14.703,21.82 22.058,46.73 22.058,74.71 0,33.22 -9.137,60.6 -27.394,82.18 -18.266,21.6 -49.934,35.71 -94.996,42.34"
          style="fill:#6d6c6a;fill-opacity:1;fill-rule:nonzero;stroke:none"
          transform="matrix(0.13333333,0,0,-0.13333333,0,298.26667)" />
