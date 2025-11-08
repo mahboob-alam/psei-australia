@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../app_theme.dart';
 import '../utils/apk_download_helper.dart';
@@ -70,7 +69,7 @@ class PortfolioPage extends StatelessWidget {
         'url': 'https://y3smilesdental.com.au',
         'description':
             'A modern, family-focused dental clinic website for Broadmeadows, Melbourne. Features online booking, comprehensive treatment info, and health fund integration. Y3 Smiles Dental provides gentle, high-quality care for all ages, including emergency and children’s dentistry.',
-  'image': 'assets/y3_logo.svg',
+  'image': 'assets/y3_logo.png',
       },
       {
         'title': 'ZeroWave Website & Mobile App',
@@ -104,19 +103,12 @@ class PortfolioPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       if (project['image'] != null)
-                        project['image']!.endsWith('.svg')
-                            ? SvgPicture.asset(
-                                project['image']!,
-                                height: 64,
-                                fit: BoxFit.contain,
-                                placeholderBuilder: (context) => const Icon(Icons.image, size: 64),
-                              )
-                            : Image.asset(
-                                project['image']!,
-                                height: 64,
-                                fit: BoxFit.contain,
-                                errorBuilder: (context, error, stackTrace) => const Icon(Icons.broken_image, size: 64),
-                              ),
+                        Image.asset(
+                          project['image']!,
+                          height: 64,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) => const Icon(Icons.broken_image, size: 64),
+                        ),
                       const SizedBox(height: 24),
                       Text(
                         project['title']!,
