@@ -291,8 +291,17 @@ class _ContactPageState extends State<ContactPage> {
           context,
           icon: Icons.email_outlined,
           title: 'Email',
-          content: 'info@psei.com.au',
-          onTap: () => _launchEmail('info@psei.com.au'),
+          content: 'mahboob.alam.uom@gmail.com',
+          onTap: () => _launchEmail('mahboob.alam.uom@gmail.com'),
+        ),
+        const SizedBox(height: 24),
+
+        _buildContactInfoItem(
+          context,
+          icon: Icons.phone_outlined,
+          title: 'Phone',
+          content: '0448 337 022',
+          onTap: () => _launchUrl('tel:+61448337022'),
         ),
         const SizedBox(height: 24),
         
@@ -413,16 +422,28 @@ class _ContactPageState extends State<ContactPage> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // In a real app, you would send this data to a backend
-      // For now, we'll show a success message
+      final String name = _nameController.text;
+      final String email = _emailController.text;
+      final String company = _companyController.text;
+      final String service = _selectedService;
+      final String message = _messageController.text;
+
+      final Uri emailUri = Uri(
+        scheme: 'mailto',
+        path: 'mahboob.alam.uom@gmail.com',
+        query: Uri.encodeFull(
+          'subject=Website Contact: $service&body='
+          'Name: $name\nEmail: $email\nCompany: $company\nService: $service\nMessage: $message'
+        ),
+      );
+      launchUrl(emailUri);
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Thank you! We\'ll get back to you soon.'),
+          content: Text('Your email app will open to send the message.'),
           backgroundColor: AppTheme.accent,
         ),
       );
-      
-      // Clear the form
       _nameController.clear();
       _emailController.clear();
       _companyController.clear();
