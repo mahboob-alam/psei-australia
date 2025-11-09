@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://psei.com.au/sitemap.xml
