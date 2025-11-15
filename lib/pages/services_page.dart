@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../utils/responsive.dart';
-import '../widgets/hero_image.dart';
+import '../widgets/video_background.dart';
 import '../widgets/footer.dart';
 
 class ServicesPage extends StatelessWidget {
@@ -14,39 +14,57 @@ class ServicesPage extends StatelessWidget {
         child: Column(
           children: [
             // Hero Section
-            Container(
+            SizedBox(
               width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    AppTheme.primary.withOpacity(0.1),
-                    AppTheme.accent.withOpacity(0.05),
-                  ],
-                ),
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: Responsive.isMobile(context) ? 20 : 80,
-                vertical: Responsive.isMobile(context) ? 60 : 100,
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    'Our Services',
-                    style: Theme.of(context).textTheme.displayMedium,
-                    textAlign: TextAlign.center,
+              height: Responsive.isMobile(context) ? 400 : 500,
+              child: VideoBackground(
+                assetPath: 'assets/videos/services_bg.mp4',
+                opacity: 0.35,
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Responsive.isMobile(context) ? 20 : 80,
+                    vertical: Responsive.isMobile(context) ? 60 : 100,
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Comprehensive software solutions tailored to your business needs',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: AppTheme.textSecondary,
-                          fontWeight: FontWeight.w400,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Our Services',
+                        style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              shadows: [
+                                Shadow(
+                                  offset: const Offset(2, 2),
+                                  blurRadius: 4,
+                                  color: Colors.black.withOpacity(0.6),
+                                ),
+                              ],
+                            ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16),
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 700),
+                        child: Text(
+                          'Comprehensive software solutions tailored to your business needs',
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                shadows: [
+                                  Shadow(
+                                    offset: const Offset(1, 1),
+                                    blurRadius: 3,
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                ],
+                              ),
+                          textAlign: TextAlign.center,
                         ),
-                    textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
 
@@ -159,14 +177,25 @@ class ServicesPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Add hero image based on service type
-                HeroImage(
-                  type: service['icon'] == Icons.web
-                      ? 'development'
-                      : service['icon'] == Icons.cloud_outlined
-                          ? 'cloud'
-                          : 'analytics',
+                // Service icon
+                Container(
                   height: 180,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        AppTheme.primary.withOpacity(0.1),
+                        AppTheme.accent.withOpacity(0.1),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      service['icon'] as IconData,
+                      size: 80,
+                      color: AppTheme.primary,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 24),
                 Text(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../app_theme.dart';
 import '../utils/responsive.dart';
-import '../widgets/hero_image.dart';
+import '../widgets/video_background.dart';
 import '../widgets/footer.dart';
 
 class ContactPage extends StatefulWidget {
@@ -50,48 +50,54 @@ class _ContactPageState extends State<ContactPage> {
   }
 
   Widget _buildHeroSection(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            AppTheme.primary.withOpacity(0.1),
-            AppTheme.accent.withOpacity(0.05),
-          ],
+      height: Responsive.isMobile(context) ? 400 : 500,
+      child: VideoBackground(
+        assetPath: 'assets/videos/contact_us.mp4',
+        opacity: 0.4,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: Responsive.isMobile(context) ? 20 : 80,
+            vertical: Responsive.isMobile(context) ? 60 : 100,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Get In Touch',
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      shadows: [
+                        Shadow(
+                          offset: const Offset(2, 2),
+                          blurRadius: 4,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                      ],
+                    ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Let\'s discuss how we can help transform your business',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      shadows: [
+                        Shadow(
+                          offset: const Offset(1, 1),
+                          blurRadius: 3,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                      ],
+                    ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: Responsive.isMobile(context) ? 20 : 80,
-        vertical: Responsive.isMobile(context) ? 60 : 100,
-      ),
-      child: Column(
-        children: [
-          // Add hero image
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 600),
-            child: const HeroImage(
-              type: 'contact',
-              height: 250,
-            ),
-          ),
-          const SizedBox(height: 32),
-          Text(
-            'Get In Touch',
-            style: Theme.of(context).textTheme.displayMedium,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Let\'s discuss how we can help transform your business',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: AppTheme.textSecondary,
-                  fontWeight: FontWeight.w400,
-                ),
-            textAlign: TextAlign.center,
-          ),
-        ],
       ),
     );
   }

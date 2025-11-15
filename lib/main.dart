@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:media_kit/media_kit.dart';
 
 import 'app_theme.dart';
 import 'pages/home_page.dart';
@@ -10,6 +11,10 @@ import 'pages/portfolio_page.dart';
 import 'widgets/app_scaffold.dart';
 
 void main() {
+  // Initialize MediaKit for video playback on desktop platforms
+  WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
+  
   // Remove the hash (#) from web URLs for better SEO-friendly paths
   setPathUrlStrategy();
   runApp(const MainApp());

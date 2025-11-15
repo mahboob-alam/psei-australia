@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../app_theme.dart';
 import '../utils/apk_download_helper.dart';
+import '../widgets/video_background.dart';
 import '../widgets/footer.dart';
 
 class PortfolioPage extends StatelessWidget {
@@ -25,39 +25,56 @@ class PortfolioPage extends StatelessWidget {
   }
 
   Widget _buildHero(BuildContext context) {
-    return Container(
+    final isMobile = MediaQuery.of(context).size.width < 600;
+    return SizedBox(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        horizontal: MediaQuery.of(context).size.width < 600 ? 20 : 80,
-        vertical: 80,
-      ),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [AppTheme.primary, AppTheme.accent],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+      height: isMobile ? 350 : 450,
+      child: VideoBackground(
+        assetPath: 'assets/videos/portfolio_bg.mp4',
+        opacity: 0.25,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 20 : 80,
+            vertical: 80,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Portfolio',
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                      color: Colors.white,
+                      fontSize: 42,
+                      fontWeight: FontWeight.w700,
+                      shadows: [
+                        Shadow(
+                          offset: const Offset(2, 2),
+                          blurRadius: 4,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ],
+                    ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Our notable projects and digital solutions',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      shadows: [
+                        Shadow(
+                          offset: const Offset(1, 1),
+                          blurRadius: 3,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                      ],
+                    ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
-      ),
-      child: Column(
-        children: [
-          Text(
-            'Portfolio',
-            style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  color: Colors.white,
-                  fontSize: 42,
-                ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Our notable projects and digital solutions',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Colors.white70,
-                  fontWeight: FontWeight.w400,
-                ),
-            textAlign: TextAlign.center,
-          ),
-        ],
       ),
     );
   }
